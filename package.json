@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha \"src/**/*.test.js\" --recursive --require @babel/register"
+    "test": "npx mocha \"src/**/*.test.js\" --recursive --require @babel/register --file src/mocha-setup.js"
   },
   "keywords": [],
   "author": "Christian Fleschhut",
@@ -15,10 +15,12 @@
     "@babel/register": "^7.16.9",
     "chai": "^4.3.5",
     "mocha": "^9.2.0",
+    "regenerator-runtime": "^0.13.9",
     "supertest": "^6.2.2"
   },
   "dependencies": {
     "express": "^4.17.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mongodb": "^4.3.1"
   }
 }
