@@ -1,15 +1,13 @@
-import { MongoClient } from 'mongodb';
 import { expect } from 'chai';
 import { getUserByUsername } from './db';
+import {
+  getDatabaseData,
+  setDatabaseData,
+  resetDatabase,
+} from './test-helpers';
 
 describe('getUserByUsername', () => {
   it('gets the correct user from the database given a username', async () => {
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
-
-    await client.connect();
-
-    const db = client.db('tdd_es6_test');
-
     const fakeData = [
       {
         id: '123',
@@ -23,13 +21,11 @@ describe('getUserByUsername', () => {
       },
     ];
 
-    await db.collection('users').insertMany(fakeData);
+    await setDatabaseData('users', fakeData);
 
     const actual = await getUserByUsername('abc');
-    const finalDBState = await db.collection('users').find().toArray();
-
-    await db.dropDatabase();
-    client.close();
+    const finalDBState = await getDatabaseData('users');
+    await resetDatabase();
 
     const expected = {
       id: '123',
