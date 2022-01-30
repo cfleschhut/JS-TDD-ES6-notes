@@ -24,4 +24,18 @@ describe('GET /users/username', () => {
 
     stub.restore();
   });
+
+  it('sends the correct response when there is an error', async () => {
+    const fakeError = { message: 'Something went wrong' };
+
+    const stub = sinon.stub(db, 'getUserByUsername').throws(fakeError);
+
+    await request(app)
+      .get('/users/abc')
+      .expect(500)
+      .expect('Content-Type', /json/)
+      .expect(fakeError);
+
+    stub.restore();
+  });
 });
