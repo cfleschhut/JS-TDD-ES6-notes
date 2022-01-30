@@ -13,3 +13,7 @@ export const getUserByUsername = async (username) => {
 
   return result;
 };
+
+export default {
+  getUserByUsername,
+};
