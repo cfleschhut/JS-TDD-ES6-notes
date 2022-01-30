@@ -38,4 +38,6 @@ describe('GET /users/username', () => {
 
     stub.restore();
   });
+
+  xit('returns the appropriate response when the user is not found', async () => {});
 });
